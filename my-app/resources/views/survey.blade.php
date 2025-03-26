@@ -47,5 +47,9 @@
     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">更新</button>
 </form>
     
+<form action="{{ route('logout') }}" method="POST">
+    @csrf
+    <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded">ログアウト</button>
+</form>
     
 </x-app-layout>
