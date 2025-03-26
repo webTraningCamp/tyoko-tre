@@ -29,4 +29,10 @@ class HistoryController extends Controller
 
         return response()->json($history, 201);
     }
+
+    public function show()
+    {
+        $history = History::with('user')->latest()->get();
+        return view('history.index', compact('history'));
+    }
 }
