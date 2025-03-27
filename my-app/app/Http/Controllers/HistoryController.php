@@ -23,7 +23,7 @@ class HistoryController extends Controller
             'mission' => $request->mission
         ]);
 
-        return response()->json($history, 201);
+        return redirect()->route('home');
     }
 
     public function show()
