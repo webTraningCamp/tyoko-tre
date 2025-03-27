@@ -20,7 +20,8 @@ class HistoryController extends Controller
         // dd($request->all(),$request->mission);
         $history = History::create([
             'user_id' => Auth::id(),
-            'mission' => $request->mission
+            'mission' => $request->mission,
+            'rotate' => mt_rand(0, 360),
         ]);
 
         $user = Auth::user();

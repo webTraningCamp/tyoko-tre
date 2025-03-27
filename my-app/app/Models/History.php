@@ -11,7 +11,7 @@ class History extends Model
 
     protected $table = 'history';
 
-    protected $fillable = ['user_id', 'text', 'mission'];
+    protected $fillable = ['user_id', 'text', 'mission','rotate'];
 
     // ユーザーとのリレーション
     public function user()

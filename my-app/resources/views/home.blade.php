@@ -137,7 +137,7 @@
     
             <div class="grid grid-cols-7 grid-rows-5 gap-[9px]">
                 @foreach($calender_array as $index => $day)
-                    <div class="bg-white w-[30px] h-[30px]"><p class="
+                    <div class="bg-white w-[30px] h-[30px] relative"><p class="
                     @foreach($saturday_array as $saturday)
                         @if($day == $saturday)
                             text-[#549EFF]
@@ -153,7 +153,9 @@
                             text-[#BAB8B8]
                         @endif
                     @endforeach
-                    ">{{$day}}</p></div>
+                    ">{{$day}}</p>
+                    <img src="{{ asset('img/yokudekimasita.svg') }}" alt="よくできました" class="absolute top-0 left-0">
+                </div>
                 @endforeach
             </div>
         </div>
