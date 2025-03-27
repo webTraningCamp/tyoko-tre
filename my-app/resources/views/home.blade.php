@@ -1,9 +1,12 @@
 <?php
     use App\Models\Mission;
     use App\Models\User;
+    use App\Models\History;
     use Illuminate\Support\Facades\Auth;
 
     $user = Auth::user();
+    $history = History::where('user_id', Auth::id())->get();
+
     $hobbies1 = $user->hobbies1;
     $hobbies2 = $user->hobbies2;
     $missions = Mission::where('genre', $hobbies1)
@@ -12,6 +15,11 @@
                 ->inRandomOrder()
                 ->take(3)
                 ->get();
+
+    $calender_array =[30,31,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,1,2,3];
+    $saturday_array = [5,12,19,26];
+    $sunday_array = [6,13,20,27];
+    $other_month_length_array = [0,1,32,33,34];
 ?>
 
 <!DOCTYPE html>
@@ -32,12 +40,16 @@
 </head>
 <body class="text-[12px]">
     <div id="dialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <form>
+        <form action="{{ route('history.update') }}">
+        @csrf
+        @method('PUT')
             <div class="relative">
                 <button type="submit" class="absolute top-[10px] right-[10px]"><img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)"></button>
                 <div class="bg-white rounded-[20px] px-[65px] w-[360px] h-[150px] flex flex-col items-center justify-center">
                     <h2 class="text-[16px] font-semibold text-[#ED6E1B]">おもいで</h2>
-                    <input type="text" class="py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full">
+                    {{ session('created_at') }}
+                    <input type="hidden" name="created_at" value="{{ session('created_at') }}">
+                    <input type="text" name="text" class="py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full">
                     <button class="mt-[10px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] 
                     text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]" 
                     style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
@@ -94,16 +106,17 @@
                         </button>
                     </form>
                     @else
-                    <form action="{{ route('history.store') }}" class="w-full flex flex-col items-center" method="POST">
+                    <form action="{{ route('history.store') }}" method="POST" class="w-full flex flex-col items-center">
+
                         @csrf
                         @method('POST')
-                        
+
                         <div class="w-full flex justify-between px-[30px]">
                             <input type="hidden" name="mission" value="{{ $user->mission }}">
                             <input type="checkbox" name="mission" value="{{ $user->mission }}"  onclick="endMission(this)" required/>
                             <div class="queText">{{ $user->mission }}</div>
                         </div>
-                        <button type="submit" onclick="openDialog(this)" class="mt-[20px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                        <button type="submit" class="mt-[20px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
                             <p>クリアしたよ！</p>
                         </button>
                     </form>
@@ -111,77 +124,37 @@
             </div>
         </div>
         
-        <div class="calenderOutside">
+        <div class="p-[20px] pb-[40px] bg-[#BDEEFF] rounded-[20px] mt-[20px]">
             <div class="calenderInside">
                 <div class="calenderImgCluster">
-                    <div>
                     <div class="nowMonth">
-                        4月
+                        3月
                     </div>
-                       <img src="image/sakuraNamake.png" class="monthImg">
-                </div>
-                </div>
-                <div class="calenderInside"></div>
-                
+                    <img src="{{ asset('img/calender_namake.svg') }}" alt="カレンダーナマケモノ">
+                </div>  
             </div>
     
     
-            <div class="calenderAbout">
-                <div class="weeks"></div>
-                <div class="calenderWeeks">
-                    <div class="calenderDay">30</div>
-                    <div class="calenderDay">31</div>
-                    <div class="calenderDay">1</div>
-                    <div class="calenderDay">2</div>
-                    <div class="calenderDay">3</div>
-                    <div class="calenderDay">4</div>
-                    <div class="calenderDay weekMon">5</div>
-                    <div class="calenderDay weekSat">6</div>
-                </div>
-                <div class="calenderWeeks">
-                    <div class="calenderDay">7</div>
-                    <div class="calenderDay">8</div>
-                    <div class="calenderDay">9</div>
-                    <div class="calenderDay">10</div>
-                    <div class="calenderDay">11</div>
-                    <div class="calenderDay weekMon">12</div>
-                    <div class="calenderDay weekSat">13</div>
-                    <div class="calenderDay">14</div>
-                </div>
-                <div class="calenderWeeks">
-                    <div class="calenderDay">15</div>
-                    <div class="calenderDay">16</div>
-                    <div class="calenderDay">17</div>
-                    <div class="calenderDay">18</div>
-                    <div class="calenderDay weekMon">19</div>
-                    <div class="calenderDay weekSat">20</div>
-                    <div class="calenderDay">21</div>
-                    <div class="calenderDay">22</div>
-                </div>
-                <div class="calenderWeeks">
-                    <div class="calenderDay">23</div>
-                    <div class="calenderDay">24</div>
-                    <div class="calenderDay">25</div>
-                    <div class="calenderDay weekMon">26</div>
-                    <div class="calenderDay weekSat">27</div>
-                    <div class="calenderDay">28</div>
-                    <div class="calenderDay">29</div>
-                    <div class="calenderDay">30</div>
-                </div>
-                <div class="calenderWeeks">
-                    <div class="calenderDay">1</div>
-                    <div class="calenderDay">2</div>
-                    <div class="calenderDay">3</div>
-                    <div class="calenderDay">4</div>
-                    <div class="calenderDay">5</div>
-                    <div class="calenderDay">6</div>
-                    <div class="calenderDay">7</div>
-                    <div class="calenderDay">8</div>
-                </div>
-                <div class="calenderWeeks">
-                    <div class="calenderDay">9</div>
-                    <div class="calenderDay">10</div>
-                </div>
+            <div class="grid grid-cols-7 grid-rows-5 gap-[9px]">
+                @foreach($calender_array as $index => $day)
+                    <div class="bg-white w-[30px] h-[30px]"><p class="
+                    @foreach($saturday_array as $saturday)
+                        @if($day == $saturday)
+                            text-[#549EFF]
+                        @endif
+                    @endforeach
+                    @foreach($sunday_array as $sunday)
+                        @if($day == $sunday)
+                            text-[#F76868]
+                        @endif
+                    @endforeach
+                    @foreach($other_month_length_array as $other_month_length)
+                        @if($index == $other_month_length)
+                            text-[#BAB8B8]
+                        @endif
+                    @endforeach
+                    ">{{$day}}</p></div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -194,11 +167,6 @@
                 checkbox.checked = false;
             }
         });
-    }
-
-    function openDialog(element) {
-        const dialog = document.getElementById('dialog');
-        dialog.style.display = 'fixed';
     }
 
     function closeDialog(element) {

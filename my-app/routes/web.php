@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/user/update', [UserController::class, 'updateMultiple'])->name('user.update.multiple');
     Route::get('/history', [HistoryController::class, 'index']); // 履歴の取得
     Route::post('/history', [HistoryController::class, 'store'])->name('history.store'); // 履歴の追加
+    Route::put('/history', [HistoryController::class, 'update'])->name('history.update'); // 履歴の追加
     Route::post('/user/increment-achieved-day', [UserController::class, 'incrementAchievedDay'])
     ->name('user.increment.achieved_day'); //achievedの更新
 });

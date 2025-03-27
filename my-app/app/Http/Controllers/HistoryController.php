@@ -35,4 +35,16 @@ class HistoryController extends Controller
         $history = History::with('user')->latest()->get();
         return view('history.index', compact('history'));
     }
+
+    public function update(Request $request)
+    {
+        $history = History::find($request->created_at);
+
+        dd($history);
+        $history->update([
+            'mission' => $request->mission,
+        ]);
+
+        return redirect()->route('home');
+    }
 }
