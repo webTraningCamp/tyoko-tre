@@ -28,7 +28,15 @@ class HistoryController extends Controller
         $user->achieved_day += 1;
         $user->save();
 
-        return redirect()->route('home');
+
+         // 今追加したデータの日付（日）を取得
+        $createdDay = $history->created_at->format('d');
+
+        // ダイアログを表示するためのフラッシュメッセージを追加
+        return redirect()->route('home')->with([
+            'show_dialog2' => true,
+            'stamped_day' => $createdDay
+        ]);
     }
 
     public function show()

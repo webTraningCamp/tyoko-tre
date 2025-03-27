@@ -5,7 +5,33 @@
     use Illuminate\Support\Facades\Auth;
 
     $user = Auth::user();
-    $history = History::where('user_id', Auth::id())->get();
+
+    $latestHistory = History::where('user_id', Auth::id())
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+    $latestDate = null;
+    if ($latestHistory) {
+        // 最新のcreated_atの日付部分を 'd' フォーマットで取得
+        $latestDate = $latestHistory->created_at->format('d');
+    }
+    // dd($latestDate);
+    $history = History::where('user_id', Auth::id())
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+    $rotate_data = [];
+
+    foreach ($history as $item) {
+        // created_at の日付部分を 'd' フォーマットで取得
+        $date = $item->created_at->format('d');
+
+        // created_atの日付をキーにrotateを値として連想配列に追加
+        $rotate_data[] = [
+            'date' => $date,
+            'rotate' => $item->rotate, // rotateの値も追加
+        ];
+    }
 
     $hobbies1 = $user->hobbies1;
     $hobbies2 = $user->hobbies2;
@@ -60,8 +86,46 @@
         </form>
     </div>
 
+    <div id="dialog2" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[100] hidden"> 
+        <div class="p-[20px] pb-[40px] bg-[#BDEEFF] rounded-[20px] mt-[20px]">
+            <div class="relative h-[200px]">
+                <div class="flex justify-between">
+                    <p class="text-[48px] font-bold text-[#2AB9ED]">3<span class="text-[38px]">月</span></p>
+                    <img src="{{ asset('img/calender_namake.svg') }}" class="absolute right-0 top-0 w-[283px] h-[200px]" alt="カレンダーナマケモノ">
+                </div>  
+            </div>
+            <div class="grid grid-cols-7 grid-rows-5 gap-[9px]">
+                @foreach($calender_array as $index => $day)
+                    <div class="bg-white w-[30px] h-[30px] relative"><p class="
+                    @foreach($saturday_array as $saturday)
+                        @if($day == $saturday)
+                            text-[#549EFF]
+                        @endif
+                    @endforeach
+                    @foreach($sunday_array as $sunday)
+                        @if($day == $sunday)
+                            text-[#F76868]
+                        @endif
+                    @endforeach
+                    @foreach($other_month_length_array as $other_month_length)
+                        @if($index == $other_month_length)
+                            text-[#BAB8B8]
+                        @endif
+                    @endforeach
+                    ">{{$day}}</p>
+                    @foreach($rotate_data as $data)
+                        @if($day == $data['date'] && $day != $latestDate)
+                            <img src="{{ asset('img/yokudekimasita.svg') }}" alt="ナマケモノ" class="absolute top-0 left-0 rotate-[{{ $data['rotate'] }}deg]">
+                        @endif
+                    @endforeach
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
     <div class="head flex items-center justify-end">
-        <img src="{{ asset('img/icon.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px]">
+        <img src="{{ asset('img/icon.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px] mr-2">
     </div>
 
     <div class="px-[26px]">
@@ -125,12 +189,10 @@
         </div>
         
         <div class="p-[20px] pb-[40px] bg-[#BDEEFF] rounded-[20px] mt-[20px]">
-            <div class="calenderInside">
-                <div class="calenderImgCluster">
-                    <div class="nowMonth">
-                        3月
-                    </div>
-                    <img src="{{ asset('img/calender_namake.svg') }}" alt="カレンダーナマケモノ">
+            <div class="relative h-[200px]">
+                <div class="flex justify-between">
+                    <p class="text-[48px] font-bold text-[#2AB9ED]">3<span class="text-[38px]">月</span></p>
+                    <img src="{{ asset('img/calender_namake.svg') }}" class="absolute right-0 top-0 w-[283px] h-[200px]" alt="カレンダーナマケモノ">
                 </div>  
             </div>
     
@@ -154,7 +216,11 @@
                         @endif
                     @endforeach
                     ">{{$day}}</p>
-                    <img src="{{ asset('img/yokudekimasita.svg') }}" alt="よくできました" class="absolute top-0 left-0">
+                    @foreach($rotate_data as $data)
+                        @if($day == $data['date'])
+                            <img src="{{ asset('img/yokudekimasita.svg') }}" alt="ナマケモノ" class="absolute top-0 left-0 rotate-[{{ $data['rotate'] }}deg]">
+                        @endif
+                    @endforeach
                 </div>
                 @endforeach
             </div>
@@ -163,17 +229,95 @@
 </body>
 
 <script>
-    function toggleCheckbox(selected) {
-        document.querySelectorAll('input[name="mission"]').forEach(checkbox => {
-            if (checkbox !== selected) {
-                checkbox.checked = false;
+    document.addEventListener('DOMContentLoaded', function() {
+        // ダイアログを表示するかどうかをチェック
+        @if(session('show_dialog2'))
+            const dialog2 = document.getElementById('dialog2');
+            const stampedDay = {{ session('stamped_day') }};
+            
+            if (dialog2) {
+                dialog2.style.display = 'flex';
+                dialog2.style.opacity = '1';
+                dialog2.style.transition = 'opacity 0.5s ease-out';
+                
+                // カレンダー内の対応する日付の要素を取得
+                const dayElements = document.querySelectorAll('.bg-white');
+                dayElements.forEach(dayElement => {
+                    const dayText = dayElement.querySelector('p');
+                    if (dayText && parseInt(dayText.textContent) === stampedDay) {
+                        // 既存のスタンプを非表示にする
+                        const existingStamp = dayElement.querySelector('img[alt="ナマケモノ"]');
+                        if (existingStamp) {
+                            existingStamp.style.display = 'none';
+                        }
+
+                        // 新しいアニメーションスタンプを追加
+                        const stampImg = document.createElement('img');
+                        stampImg.src = "{{ asset('img/yokudekimasita.svg') }}";
+                        stampImg.alt = "ナマケモノ";
+                        stampImg.classList.add('absolute', 'top-0', 'left-0', 'animate-stamp');
+                        
+                        // ランダムな角度を生成
+                        const randomRotation = Math.floor(Math.random() * 361);
+                        stampImg.style.transform = `rotate(${randomRotation}deg)`;
+                        
+                        dayElement.appendChild(stampImg);
+
+                        // アニメーション終了後にdialog2をフェードアウト
+                        stampImg.addEventListener('animationend', function() {
+                            setTimeout(() => {
+                                dialog2.style.opacity = '0';
+                                
+                                // opacityアニメーション完了後にdisplayを none にする
+                                dialog2.addEventListener('transitionend', function() {
+                                    dialog2.style.display = 'none';
+                                }, { once: true });
+                            }, 1500); // スタンプアニメーションの後に少し待ってからフェードアウト
+                        });
+                    }
+                });
             }
-        });
+        @endif
+
+        function toggleCheckbox(selected) {
+            document.querySelectorAll('input[name="mission"]').forEach(checkbox => {
+                if (checkbox !== selected) {
+                    checkbox.checked = false;
+                }
+            });
+        }
+
+        function closeDialog(element) {
+            const dialog = document.getElementById('dialog');
+            dialog.style.display = 'none';
+        }
+
+        function closeDialog2() {
+            const dialog2 = document.getElementById('dialog2');
+            dialog2.style.display = 'none';
+        }
+    });
+</script>
+
+<style>
+    @keyframes stamp {
+        0% {
+            transform: scale(3) rotate(0deg);
+            opacity: 0;
+        }
+        70% {
+            transform: scale(1.2) rotate(var(--rotation));
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1) rotate(var(--rotation));
+            opacity: 1;
+        }
     }
 
-    function closeDialog(element) {
-        const dialog = document.getElementById('dialog');
-        dialog.style.display = 'none';
+    .animate-stamp {
+        animation: stamp 1.5s ease-out;
+        animation-fill-mode: forwards;
     }
-</script>
+</style>
 </html>
