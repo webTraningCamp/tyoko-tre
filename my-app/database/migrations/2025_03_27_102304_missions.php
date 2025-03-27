@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->string('genre');
-            $table->string('mission1');
-            $table->string('mission2');
-            $table->string('mission3');
+            $table->string('mission');
             $table->timestamps();
         });
     }
