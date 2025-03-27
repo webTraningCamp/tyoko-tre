@@ -6,27 +6,21 @@
     $remaining_day = $user->target_day - $user->achieved_day;
     $hobbies = [
         [
-            'value'=>'dancing',
             'text'=>'ダンス'
         ],
         [
-            'value'=>'cicling',
             'text'=>'サイクリング'
         ],
         [
-            'value'=>'pet',
             'text'=>'ペット'
         ],
         [
-            'value'=>'reading',
             'text'=>'読書'
         ],
         [
-            'value'=>'walking',
             'text'=>'散歩'
         ],
         [
-            'value'=>'shopping',
             'text'=>'買い物'
         ]
     ];
@@ -103,7 +97,7 @@
         <div class="border border-2px border-black mt-4">
             @foreach($hobbies as $hobby)
                 <button type="button" class="hobbie_btn bg-gray-200 px-4 py-2 rounded" 
-                    data-value="{{ $hobby['value'] }}" 
+                    data-value="{{ $hobby['text'] }}" 
                     onclick="toggleHobby(this)">
                     {{ $hobby['text'] }}
                 </button>
