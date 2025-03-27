@@ -19,12 +19,14 @@ class HistoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'action' => 'required|string|max:255',
+            'text' => 'required|string|max:255',
+            'mission' => 'required|string|max:255',
         ]);
 
         $history = History::create([
             'user_id' => Auth::id(),
-            'action' => $request->action,
+            'mission' => $request->mission,
+            'text' => $request->text,
         ]);
 
         return response()->json($history, 201);

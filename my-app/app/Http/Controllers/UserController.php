@@ -34,7 +34,7 @@ class UserController extends Controller
     $user->save();
 
     return redirect()->route('home');
-}
+    }
 
     public function incrementAchievedDay()
     {
@@ -43,6 +43,15 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', '達成日数が増えました！');
+    }
+
+    public function updateMission(Request $request)
+    {
+        $user = Auth::user();
+        $user->mission = $request->mission;
+        $user->save();
+
+        return redirect()->back()->with('success', 'ミッションを更新しました！');
     }
 
 }
