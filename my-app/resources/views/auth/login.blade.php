@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="flex flex-col items-center justify-center h-full">
+    <div class="flex flex-col items-center justify-center h-full text-[12px]">
         <img src="{{ asset('img/namake_mado.svg') }}" alt="ナマケアイコン">
         <h1 class="mt-[30px] text-white font-semibold text-[17px]">ログイン</h1>
     
@@ -23,14 +23,6 @@
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
     
-            <!-- Remember Me -->
-            <!-- <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                </label>
-            </div> -->
-    
             <div class="flex items-center justify-center mt-[20px]">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-white hover:text-gray-900  rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
@@ -42,11 +34,9 @@
             <button class="bg-[#4EBDE5] border-[2px] border-white w-[157px] py-[10px] text-white flex items-center justify-center rounded-[10px] mt-[20px] m-auto">
                 {{ __('ログイン') }}
             </button>
+            <a class="bg-[#70D648] border-[2px] border-white w-[157px] py-[10px] text-white flex items-center justify-center rounded-[10px] mt-[20px] m-auto" href="{{ route('register') }}">
+                {{ __('新規登録はこちら') }}
+            </a>
         </form>
-        <div>
-              <button class="bg-[#70D648] border-[2px] border-white w-[157px] py-[10px] text-white flex items-center justify-center rounded-[10px] mt-[20px] m-auto">
-                  {{ __('新規登録はこちら') }}
-              </button>
-        </div>
     </div>
 </x-guest-layout>
