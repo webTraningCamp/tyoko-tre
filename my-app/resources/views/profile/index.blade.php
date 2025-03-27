@@ -45,9 +45,6 @@
                 <section class="flex justify-between items-center pb-[17px] border-b-[1px] border-[#2A2A2A]">
                         <h2 class="font-semibold">直近メニュー</h2>
                 </section>
-
-        </section>
-
         </section>
     </section>
 </x-app-layout>

@@ -1,0 +1,116 @@
+html {
+    background-color: #fbf3d9;
+}
+
+.flex {
+    display: flex;
+}
+.font-12 {
+    font-size: 12px;
+}
+.font-14 {
+    font-size: 14px;
+}
+
+.speechBubble {
+    width: 50%;
+    padding: 3%;
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+    /* padding-top: 10%; */
+    margin-top: 20%;
+    position: relative;
+    border-radius: 20px;
+}
+.speechBubble:before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 45%;
+    border: 15px solid transparent;
+    border-top: 15px solid white;
+}
+
+.topImgTenp {
+    display: block;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 137px;
+    height: 187px;
+}
+
+.aboutYouPart {
+    width: 90%;
+    background-color: #eaf069;
+    margin: 0 auto;
+    margin-top: 10%;
+    border-radius: 15px;
+}
+.quesYou {
+    width: 90%;
+    margin: 4% 0;
+    /* background-color: red; */
+    margin-left: 5%;
+    border-bottom: solid 1px #2a2a2a;
+    /* padding: 10%; */
+    padding: 2% 0;
+}
+.spaceBetween {
+    display: flex;
+    justify-content: space-between;
+}
+.quesYouItem {
+    /* width: 30%;
+    font-size: 12px;
+    text-align: center;
+    background-color: green;
+    border-radius: 20px;
+    margin: 1%; */
+    background-color: white;
+    padding: 1% 0;
+    width: 30%;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 1.5% 1%;
+}
+
+.ChallengeDayPart {
+    width: 90%;
+    background-color: #eaf069;
+    margin: 10% auto;
+    border-radius: 20px;
+}
+.quesDayItem {
+    width: 25%;
+    text-align: center;
+    padding: 5% 0;
+    margin: 3% 1.5%;
+    background-color: white;
+}
+.quesDay {
+    width: 90%;
+    margin: 4% 0;
+    /* background-color: red; */
+    margin-left: 5%;
+    border-bottom: solid 1px #2a2a2a;
+    /* padding: 10%; */
+    padding: 2% 0;
+}
+.quesDayItemCluster {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.select {
+    color: white;
+    background-color: #4ebde5;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 60%;
+    border-radius: 10px;
+    padding: 2% 0;
+    border: solid 1px white;
+}

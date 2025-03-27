@@ -28,25 +28,29 @@
     $target_day_array = [
         [
             'value'=>3,
-            'text'=>"まずは3日間"
+            'text1'=>"まずは",
+            'text2'=>"3日間"
         ],
         [
             'value'=>7,
-            'text'=>"やれるぞ7日間"
+            'text1'=>"やれるぞ",
+            'text2'=>"7日間"
         ],
         [
             'value'=>30,
-            'text'=>"どんとこい30日間"
+            'text1'=>"どんとこい",
+            'text2'=>"30日間"
         ],
         [
             'value'=>90,
-            'text'=>"卒業したい90日間"
+            'text1'=>"卒業したい",
+            'text2'=>"90日間"
         ]
     ]
 ?>
 
 <x-app-layout >
-    <x-slot name="header">
+    <!-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('survey') }}
         </h2>
@@ -88,7 +92,7 @@
                     @if(old('target_day', Auth::user()->target_day) == $target_day['value']) bg-blue-500 font-semibold  
                     @else bg-gray-200 
                     @endif px-4 py-2 rounded">
-                    {{ $target_day['text'] }}
+                    {{ $target_day['text1'] }}
                 </button>
             @endforeach
         </div>
@@ -120,8 +124,57 @@
         <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded">ログアウト</button>
     </form>
     
-    <p>残り{{ $remaining_day }}日</p>
+    <p>残り{{ $remaining_day }}日</p> -->
 
+    
+    <section class="px-[10px] text-[12px] ">
+        <div class="speechBubble font-14">
+            <p>
+                はじめまして！<br>
+                あなたのことを教えて！
+            </p>
+        </div>
+    
+        <img src="{{ asset('img/namake_hi.svg') }}" class="topImgTenp">
+    
+        <section class="bg-[#eaf069] w-full text-[12px] px-[10px] py-[20px] rounded-[10px] mt-[40px]">
+            <section class="flex justify-between items-center pb-[17px] border-b-[1px] border-[#2A2A2A]">
+                    <h2 class="font-semibold">あなたに当てはまるものは？</h2>
+            </section>
+            <section class="grid grid-cols-3 grid-row-2 mt-[20px]">
+                @foreach($hobbies as $hobby)
+                    <button type="button" class="h-[21px] bg-white flex justify-center items-center rounded-[12px] mx-[5px] mb-[10px] hobbie_btn"
+                        data-value="{{ $hobby['text'] }}" 
+                        onclick="toggleHobby(this)">
+                        {{ $hobby['text'] }}
+                    </button>
+                @endforeach
+            </section>
+        </section>
+
+        <section class="bg-[#eaf069] w-full text-[12px] px-[10px] py-[20px] rounded-[10px] mt-[40px]">
+            <section class="flex justify-between items-center pb-[17px] border-b-[1px] border-[#2A2A2A]">
+                    <h2 class="font-semibold">チャレンジしたい日数は？</h2>
+            </section>
+            <section class="flex justify-between mt-[20px]">
+                @foreach($target_day_array as $target_day)
+                    <button type="button" data-value="{{ $target_day['value'] }}" 
+                        class="target-day-btn 
+                        quesDayItem
+                        @if(old('target_day', Auth::user()->target_day) == $target_day['value']) font-semibold  
+                        @endif">
+                        {{ $target_day['text1'] }}<br>
+                        {{ $target_day['text2'] }}
+                    </button>
+                @endforeach
+            </section>
+        </section>
+        
+        <div class="select font-12">
+            選択した内容ではじめる
+        </div>
+    
+    </section>
     <script>
             document.querySelectorAll('.target-day-btn').forEach(button => {
                 button.addEventListener('click', function() {
@@ -161,6 +214,5 @@
                 document.getElementById('hobbies1').value = selectedValues[0] || '';
                 document.getElementById('hobbies2').value = selectedValues[1] || '';
             }
-
     </script>
 </x-app-layout>
