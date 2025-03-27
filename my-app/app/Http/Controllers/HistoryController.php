@@ -23,6 +23,10 @@ class HistoryController extends Controller
             'mission' => $request->mission
         ]);
 
+        $user = Auth::user();
+        $user->achieved_day += 1;
+        $user->save();
+
         return redirect()->route('home');
     }
 
