@@ -33,7 +33,7 @@ class UserController extends Controller
 
     $user->save();
 
-    return redirect()->back()->with('success', 'プロフィールを更新しました！');
+    return redirect()->route('home');
 }
 
     public function incrementAchievedDay()

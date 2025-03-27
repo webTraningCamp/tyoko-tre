@@ -13,6 +13,11 @@ Route::get('/survey', function () {
     return view('survey');
 })->middleware(['auth', 'verified'])->name('survey');
 
+Route::get('/home', function () {
+    return view('home'); 
+})->name('home');
+
+
 Route::get('/history-page', [HistoryController::class, 'show'])->middleware('auth');
 
 
