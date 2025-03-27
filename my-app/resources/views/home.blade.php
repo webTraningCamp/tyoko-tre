@@ -16,9 +16,9 @@
     <title>home</title>
 </head>
 <body>
-    <div class="head">
-        <img src="image/headerCircle.png" class="headerCircle">
-    </div>
+    <a class="head flex items-center justify-end">
+        <img src="{{ asset('img/icon.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px]">
+    </a>
 
     <div class="speechBubble font-14">
         <div>今日は何しよう？</div>

@@ -60,6 +60,17 @@ return [
             'report' => false,
         ],
 
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => env('FTP_HOST', 'ftp.lolipop.jp'),
+            'username' => env('FTP_USERNAME', 'moo.jp-camp'),
+            'password' => env('FTP_PASSWORD', 'seisaku2024'),
+            'port'     => 21, // FTPのポート番号（通常は21）
+            'root'     => '/2024/A', // 指定されたリモートパス
+            'passive'  => true, // パッシブモード
+            'timeout'  => 30,   // タイムアウト時間
+        ],
+
     ],
 
     /*
