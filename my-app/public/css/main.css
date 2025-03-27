@@ -19,7 +19,7 @@ html {
     margin: 0 auto;
     text-align: center;
     /* padding-top: 10%; */
-    margin-top: 20%;
+    /* margin-top: 20%; */
     position: relative;
     border-radius: 20px;
 }
@@ -35,7 +35,7 @@ html {
 .topImgTenp {
     display: block;
     margin: 0 auto;
-    margin-top: 5%;
+    /* margin-top: 5%; */
     width: 137px;
     height: 187px;
 }
