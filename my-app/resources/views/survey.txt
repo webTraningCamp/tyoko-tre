@@ -1,0 +1,53 @@
+    <!-- <form action="{{ route('user.update.multiple') }}" method="POST">
+        @csrf
+        @method('PUT')
+
+        <label for="name">名前:</label>
+        <input type="text" class="text-black" name="name" value="{{ Auth::user()->name }}" required>
+
+        <label for="email">メールアドレス:</label>
+        <input type="email" class="text-black" name="email" value="{{ Auth::user()->email }}" required>
+
+        <label for="nickname">ニックネーム:</label>
+        <input type="text" class="text-black" name="nickname" value="{{ Auth::user()->nickname }}" ></input>
+
+        <select name="age" required>
+            @for ($i = 1; $i <= 80; $i++)
+                <option value="{{ $i }}" @selected(old('age', Auth::user()->age) == $i)>{{ $i }}</option>
+            @endfor
+        </select>
+
+        <input type="radio" name="gender" value="1" @checked(old('gender', Auth::user()->gender) == 1) required>
+        <label for="1">男性</label>
+        <input type="radio" name="gender" value="2" @checked(old('gender', Auth::user()->gender) == 2) required>
+        <label for="2">女性</label>
+
+        <div class="border border-2px border-black mt-4">
+            @foreach($target_day_array as $target_day)
+                <button type="button" data-value="{{ $target_day['value'] }}" 
+                    class="target-day-btn 
+                    @if(old('target_day', Auth::user()->target_day) == $target_day['value']) bg-blue-500 font-semibold  
+                    @else bg-gray-200 
+                    @endif px-4 py-2 rounded">
+                    {{ $target_day['text1'] }}
+                </button>
+            @endforeach
+        </div>
+        <input type="hidden" name="target_day" id="target_day" value="{{ old('target_day', Auth::user()->target_day) }}">
+
+        <div class="border border-2px border-black mt-4">
+            @foreach($hobbies as $hobby)
+                <button type="button" class="hobbie_btn bg-gray-200 px-4 py-2 rounded" 
+                    data-value="{{ $hobby['text'] }}" 
+                    onclick="toggleHobby(this)">
+                    {{ $hobby['text'] }}
+                </button>
+            @endforeach
+        </div>
+        <input type="hidden" name="hobbies1" id="hobbies1" value="{{ Auth::user()->hobbies1 }}">
+        <input type="hidden" name="hobbies2" id="hobbies2" value="{{ Auth::user()->hobbies2 }}">
+        
+        <button type="submit" class="bg-blue-500 px-4 py-2 rounded">更新</button>
+    </form> -->
+
+    
