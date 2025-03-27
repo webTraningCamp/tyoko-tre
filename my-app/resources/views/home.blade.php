@@ -24,12 +24,17 @@
         <div>今日は何しよう？</div>
     </div>
 
-    <img src="image/namakeHeadCenter.png" class="namakeHead">
+   <div class="flex justify-around">
+        <img src="{{ asset('img/namake_face1.svg') }}" class="namakeHead">
+        <img src="{{ asset('img/namake_face2.svg') }}" class="namakeHead">
+        <img src="{{ asset('img/namake_face3.svg') }}" class="namakeHead">
+    
+   </div>
 
     <div class="queSelect">
         <div class="resetFlex">
             <div class="font-12 todayQue">今日のクエスト</div>
-            <img src="image/resetButton.png" class="resetButton">
+            <img src="{{ asset('img/reset.svg') }}" class="resetButton">
         </div>
         <div class="font-12 queContent">
             <img src="image/checkbox/off.png" class="checkOff">
@@ -121,69 +126,5 @@
             </div>
         </div>
     </div>
-    <!-- <div class="calender">
-        <div class="font-36 nowMonth">
-            <img src="image/sakuraNamake.png" class="monthImg">
-            <div class="monNum">
-                4月
-            </div>
-        </div>
-        <div class="calenderAbout">
-            <div class="calenderWeeks">
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-            </div>
-            <div class="calenderWeeks">
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-            </div>
-            <div class="calenderWeeks">
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-            </div>
-            <div class="calenderWeeks">
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-            </div>
-            <div class="calenderWeeks">
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-            </div>
-            <div class="calenderWeeks">
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-                <div class="calenderDay">30</div>
-            </div>
-        </div>
-    </div> -->
 </body>
 </html>
