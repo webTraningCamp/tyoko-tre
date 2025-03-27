@@ -78,7 +78,7 @@
             <div class="flex flex-col items-center">
                 
                 @if($user->mission == null)
-                    <form action="{{ route('user.update.mission') }}" class="w-full flex flex-col items-center" method="POST">
+                    <form action="{{ route('user.update.multiple') }}" class="w-full flex flex-col items-center" method="POST">
                         @csrf
                         @method('PUT')
                         @foreach($randomMissions as $randomMission)
@@ -93,12 +93,14 @@
                         </button>
                     </form>
                     @else
-                    <form action="{{ route('user.update.mission') }}" class="w-full flex flex-col items-center" method="POST">
+                    <form action="{{ route('history.create') }}" class="w-full flex flex-col items-center" method="POST">
+                        @csrf
+                        @method('POST')
                         <div class="w-full flex justify-between px-[30px]">
-                            <input type="checkbox" value="{{ $user->mission }}"  onclick="endMission(this)" required/>
+                            <input type="checkbox" name="mission" value="{{ $user->mission }}"  onclick="endMission(this)" required/>
                             <div class="queText">{{ $user->mission }}</div>
                         </div>
-                        <button type="submit" class="mt-[20px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                        <button type="submit" onclick="openDialog(this)" class="mt-[20px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]" style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
                             <p>クリアしたよ！</p>
                         </button>
                     </form>
@@ -189,6 +191,11 @@
                 checkbox.checked = false;
             }
         });
+    }
+
+    function openDialog(element) {
+        const dialog = document.getElementById('dialog');
+        dialog.style.display = 'fixed';
     }
 
     function closeDialog(element) {

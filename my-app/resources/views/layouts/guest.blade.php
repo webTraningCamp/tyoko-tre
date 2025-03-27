@@ -22,7 +22,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans bg-[#F39A48] h-[100vh]">
-            <div class="w-full h-[100vh] sm:max-w-md  bg-[#F39A48] px-6 py-4">
+            <div class="h-full  bg-[#F39A48] px-6 py-4">
                 {{ $slot }}
             </div>
         </div>
