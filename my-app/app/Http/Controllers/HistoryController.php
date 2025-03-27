@@ -15,18 +15,12 @@ class HistoryController extends Controller
         return response()->json($history);
     }
 
-    // 履歴を作成
     public function store(Request $request)
     {
-        $request->validate([
-            'text' => 'required|string|max:255',
-            'mission' => 'required|string|max:255',
-        ]);
-
+        // dd($request->all(),$request->mission);
         $history = History::create([
             'user_id' => Auth::id(),
-            'mission' => $request->mission,
-            'text' => $request->text,
+            'mission' => $request->mission
         ]);
 
         return response()->json($history, 201);

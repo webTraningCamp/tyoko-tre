@@ -7,10 +7,11 @@
     $hobbies1 = $user->hobbies1;
     $hobbies2 = $user->hobbies2;
     $missions = Mission::where('genre', $hobbies1)
-                    ->orWhere('genre', $hobbies2)
-                    ->orWhere('genre', 'general')
-                    ->get();
-    $randomMissions = $missions->random(3);
+                ->orWhere('genre', $hobbies2)
+                ->orWhere('genre', 'general')
+                ->inRandomOrder()
+                ->take(3)
+                ->get();
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +82,7 @@
                     <form action="{{ route('user.update.multiple') }}" class="w-full flex flex-col items-center" method="POST">
                         @csrf
                         @method('PUT')
-                        @foreach($randomMissions as $randomMission)
+                        @foreach($missions as $randomMission)
                             <div class="w-full flex justify-between px-[30px] border-b-[1px] border-[#D9D9D9]
                             @if($loop->last) border-none @endif">
                                 <input type="checkbox" name="mission" value="{{ $randomMission->mission }}" onclick="toggleCheckbox(this)"/>
@@ -93,10 +94,12 @@
                         </button>
                     </form>
                     @else
-                    <form action="{{ route('history.create') }}" class="w-full flex flex-col items-center" method="POST">
+                    <form action="{{ route('history.store') }}" class="w-full flex flex-col items-center" method="POST">
                         @csrf
                         @method('POST')
+                        
                         <div class="w-full flex justify-between px-[30px]">
+                            <input type="hidden" name="mission" value="{{ $user->mission }}">
                             <input type="checkbox" name="mission" value="{{ $user->mission }}"  onclick="endMission(this)" required/>
                             <div class="queText">{{ $user->mission }}</div>
                         </div>
