@@ -50,7 +50,7 @@
 
 <x-app-layout >
 
-    <!-- <form action="{{ route('user.increment.achieved_day') }}" method="POST">
+    <form action="{{ route('user.increment.achieved_day') }}" method="POST">
         @csrf
         <button type="submit" class="bg-green-500 px-4 py-2 rounded">１日達成</button>
     </form>
@@ -58,7 +58,7 @@
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded">ログアウト</button>
-    </form> -->
+    </form>
 
 
         <img src="{{ asset('img/left_happa.svg') }}" alt="左葉っぱ" class="absolute left-0">
