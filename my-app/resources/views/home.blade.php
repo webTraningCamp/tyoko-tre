@@ -124,7 +124,10 @@
     </div>
 
     <div class="head flex items-center justify-end">
-        <img src="{{ asset('img/icon.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px] mr-2">
+            <a href="{{ route('profile.index') }}">
+                <img src="{{ asset('img/icon.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px] mr-2">
+            </a>
+   
     </div>
 
     <div class="px-[26px] py-[20px]">

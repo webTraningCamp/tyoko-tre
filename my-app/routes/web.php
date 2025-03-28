@@ -17,6 +17,10 @@ Route::get('/home', function () {
     return view('home'); 
 })->name('home');
 
+// Route::get('/profile', function () {
+//     return view('profile');
+// })->middleware(['auth', 'verified'])->name('profile');
+
 
 Route::get('/history-page', [HistoryController::class, 'show'])->middleware('auth');
 
