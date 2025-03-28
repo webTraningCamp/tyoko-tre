@@ -127,8 +127,8 @@
         <img src="{{ asset('img/icon.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px] mr-2">
     </div>
 
-    <div class="px-[26px]">
-        <div class="flex justify-center items-center mt-[20px]">
+    <div class="px-[26px] py-[20px]">
+        <div class="flex justify-center items-center">
             <div class="bg-white flex items-center justify-center rounded-[20px] px-[30px] py-[20px] h-[57px] font-14">
                 <p>今日は何しよう？</p>
             </div>
