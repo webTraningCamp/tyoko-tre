@@ -16,7 +16,7 @@
     </div>
 
     <header class="bg-[#F39A48] pt-[40px] pb-[20px] flex justify-center items-center flex-col">
-        <img src="{{ asset('img/icon.svg') }}" class="rounded-full" alt="ナマケモノアイコン">
+        <img src="{{ asset('img/icon1.svg') }}" class="rounded-full" alt="ナマケモノアイコン">
         <h1 class="mt-[10px] text-white text-[1.7rem] font-bold font-darumadrop">{{ $user->name }}</h1>
     </header>
     <section class="px-[10px] text-[12px] pb-[20px] ">
