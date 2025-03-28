@@ -58,17 +58,17 @@
         @csrf
         <button type="submit" class="bg-red-500 text-black px-4 py-2 rounded">ログアウト</button>
     </form> -->
-    <section class="px-[10px] text-[12px] pt-[10%] h-[100vh] bg-[#FBF3D9]">
-        <img src="{{ asset('img/left_happa.svg') }}" alt="左葉っぱ" class="absolute left-0 top-[10%]">
-        <img src="{{ asset('img/right_happa.svg') }}" alt="右葉っぱ" class="absolute right-0 top-[10%]">
+    <section class="px-[10px] text-[12px] pt-[10%] h-full bg-[#FBF3D9] pb-[20px]">
+        <img src="{{ asset('img/left_happa.svg') }}" alt="左葉っぱ" class="absolute left-0 top-[19%]">
+        <img src="{{ asset('img/right_happa.svg') }}" alt="右葉っぱ" class="absolute right-0 top-[19%]">
         <div class="speechBubble font-14">
             <p>
-                はじめまして！<br>
-                あなたのことを教えて！
+                おつかれさま！<br>
+                新しいキミのことを教えて！
             </p>
         </div>
     
-        <img src="{{ asset('img/namake_hi.svg') }}" class="topImgTenp">
+        <img src="{{ asset('img/namake_suwari.svg') }}" class="w-[180px] h-[180px] topImgTenp">
     
         <form action="{{ route('user.update.multiple') }}" method="POST">
             @csrf

@@ -17,6 +17,10 @@ Route::get('/home', function () {
     return view('home'); 
 })->name('home');
 
+Route::get('/profile/edit', function () {
+    return view('profile.edit');
+})->middleware(['auth', 'verified'])->name('profile.edit');
+
 // Route::get('/profile', function () {
 //     return view('profile');
 // })->middleware(['auth', 'verified'])->name('profile');

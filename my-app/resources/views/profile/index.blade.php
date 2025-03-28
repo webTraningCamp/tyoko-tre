@@ -15,7 +15,7 @@
         <section class="bg-[#eaf069] w-full text-[12px] px-[10px] py-[20px] rounded-[10px] mt-[40px]">
             <section class="flex justify-between items-center pb-[17px] border-b-[1px] border-[#2A2A2A]">
                 <h2 class="font-semibold">プロフィール</h2>
-                <p class="flex items-center  font-semibold">編集する<img src="{{ asset('img/sankaku.svg') }}" class="ml-1" alt="三角"></p>
+                <p><a href="{{ route('profile.edit') }}"  class="flex items-center font-semibold">編集する<img src="{{ asset('img/sankaku.svg') }}" class="ml-1" alt="三角"></a></p>
             </section>
             <section class="grid grid-cols-3 mt-[20px]">
                 <div class="w-[108px] h-[21px] bg-white flex justify-center items-center rounded-[12px] mx-[5px]">
