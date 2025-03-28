@@ -72,8 +72,8 @@
             <div class="relative">
                 <button type="button" class="absolute top-[10px] right-[10px]"><img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)"></button>
                 <div class="bg-white rounded-[20px] px-[65px] w-[360px] h-[150px] flex flex-col items-center justify-center">
-                    <h2 class="text-[16px] font-semibold text-[#ED6E1B]">おもいで</h2>
-                    <input type="text" name="text" class="py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full">
+                    <h2 class="text-[16px] font-semibold text-[#ED6E1B] font-darumadrop tracking-widest">おもいで</h2>
+                    <input type="text" name="text" class="tracking-widest py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full font-darumadrop">
                     <input type="hidden" name="date" id="dialogDate">
                     <button type="submit" class="mt-[10px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] 
                         text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]"

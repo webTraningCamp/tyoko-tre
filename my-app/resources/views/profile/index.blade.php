@@ -8,16 +8,34 @@
 
 <x-app-layout>
     <div id="dialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-[100]">
-        <form action="{{ route('history.update') }}">
+        <form action="{{ route('user.update.multiple') }}">
         @csrf
         @method('PUT')
-        
+            <div class="relative">
+                <button type="button" class="absolute top-[10px] right-[10px]"><img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)"></button>
+                <div class="bg-white rounded-[20px] px-[65px] w-[360px] py-[25px] flex flex-col items-center justify-center">
+                    <h2 class="text-[16px] font-semibold text-[#ED6E1B] font-darumadrop tracking-widest">すきなアイコンをえらんでね</h2>
+                    <div class="flex items-center justify-between mt-[10px] w-full">
+                        <img src="{{ asset('img/icon1.svg') }}" class="w-[58px] h-[58px]" alt="ナマケモノアイコン">
+                        <img src="{{ asset('img/icon2.svg') }}" class="w-[58px] h-[58px]" alt="ナマケモノアイコン2">
+                        <img src="{{ asset('img/icon3.svg') }}" class="w-[58px] h-[58px]" alt="ナマケモノアイコン3">
+                    </div>
+
+                    <h2 class="text-[16px] font-semibold text-[#ED6E1B] font-darumadrop tracking-widest mt-[10px]">あなたのなまえ</h2>
+                    <input type="text" name="name" value="{{ $user->name }}" class="py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full font-darumadrop tracking-widest">
+                    <button type="submit" class="mt-[10px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] 
+                        text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)] text-[10px]"
+                        style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                        設定完了
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
 
     <header class="bg-[#F39A48] pt-[40px] pb-[20px] flex justify-center items-center flex-col">
         <img src="{{ asset('img/icon1.svg') }}" class="rounded-full" alt="ナマケモノアイコン">
-        <h1 class="mt-[10px] text-white text-[1.7rem] font-bold font-darumadrop">{{ $user->name }}</h1>
+        <h1 class="mt-[10px] text-white text-[1.7rem] font-bold font-darumadrop relative">{{ $user->name }} <button onclick=openDialog()><img src="{{ asset('img/edit_profile.svg') }}" class="rounded-full absolute right-[-25px] top-[15px]" alt="編集アイコン"></button></h1>
     </header>
     <section class="px-[10px] text-[12px] pb-[20px] ">
         <section class="bg-[#eaf069] w-full text-[12px] px-[10px] py-[20px] rounded-[10px] mt-[40px]">
@@ -54,3 +72,15 @@
         </section>
     </section>
 </x-app-layout>
+
+<script>
+    function openDialog() {
+        document.getElementById('dialog').classList.remove('hidden');
+        document.getElementById('dialog').classList.add('flex');
+    }
+
+    function closeDialog(element) {
+        document.getElementById('dialog').classList.remove('flex');
+        document.getElementById('dialog').classList.add('hidden');
+    }
+</script>

@@ -11,12 +11,15 @@ class UserController extends Controller
     // dd($request->all());
     $user = Auth::user();
 
-    if($request->mission == null){ 
+    if($request->mission !== null){ 
+        $user->mission = $request->mission;
+    }else if($request->target_day !== null){
         $user->target_day = $request->target_day;
         $user->hobbies1 = $request->hobbies1;
         $user->hobbies2 = $request->hobbies2;
     }else{
-        $user->mission = $request->mission;
+        $user->name = $request->name;
+        $user->icon_url = $request->icon_url;
     }
 
     $user->save();
