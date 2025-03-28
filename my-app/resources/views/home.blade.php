@@ -310,7 +310,7 @@
 <style>
     @keyframes stamp {
         0% {
-            transform: scale(3) rotate(0deg);
+            transform: scale(5) rotate(0deg);
             opacity: 0;
         }
         70% {
