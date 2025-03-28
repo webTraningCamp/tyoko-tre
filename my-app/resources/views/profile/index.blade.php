@@ -36,7 +36,8 @@
         </form>
     </div>
 
-    <header class="bg-[#F39A48] pt-[40px] pb-[20px] flex justify-center items-center flex-col">
+    <header class="bg-[#F39A48] pt-[40px] pb-[20px] flex justify-center items-center flex-col relative">
+        <a href="{{ route('home') }}"><img src="{{ asset('img/backarrow.svg') }}" alt="戻る" class="absolute left-[2%] top-[8%]"></a>
         <img src="{{ asset('img/' . $user->icon_url) }}" class="rounded-full w-[82px] h-[82px]" alt="ナマケモノアイコン">
         <h1 class="mt-[10px] text-white text-[1.7rem] font-bold font-darumadrop relative">{{ $user->name }} <button onclick=openDialog()><img src="{{ asset('img/edit_profile.svg') }}" class="rounded-full absolute right-[-25px] top-[15px]" alt="編集アイコン"></button></h1>
     </header>

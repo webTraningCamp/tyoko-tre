@@ -125,7 +125,7 @@
 
     <div class="head flex items-center justify-end">
             <a href="{{ route('profile.index') }}">
-                <img src="{{ asset('img/icon1.svg') }}" alt="アイコン" class="rounded-full w-[45px] h-[45px] mr-2">
+                <img src="{{ asset('img/' . $user->icon_url) }}" alt="アイコン" class="rounded-full w-[45px] h-[45px] mr-2">
             </a>
    
     </div>
