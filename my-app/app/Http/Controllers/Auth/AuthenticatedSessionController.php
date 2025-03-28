@@ -27,8 +27,14 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        $user = Auth::user();
 
-        return redirect()->intended(route('survey', absolute: false));
+        if($user->hobbies1 == null && $user->hobbies2 == null && $user->target_day == null){
+            return redirect()->intended(route('survey', absolute: false));
+        }else{
+            return redirect()->intended(route('home', absolute: false));
+        }
+
     }
 
     /**

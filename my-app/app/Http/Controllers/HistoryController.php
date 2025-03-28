@@ -47,13 +47,24 @@ class HistoryController extends Controller
 
     public function update(Request $request)
     {
-        $history = History::find($request->created_at);
+        // リクエストデータをすべて取得
+        $data = $request->all();
 
-        dd($history);
-        $history->update([
-            'mission' => $request->mission,
-        ]);
+        // ログインユーザーの最新の履歴を取得
+        $history = History::where('user_id', Auth::id())
+            ->where('date', $request->input('date')) // 日付で絞り込み
+            ->latest()
+            ->first();
 
-        return redirect()->route('home');
+        if ($history) {
+            $history->update([
+                'text' => $request->input('text')
+            ]);
+
+            return redirect()->route('home')->with('success', 'おもいでを保存しました');
+        }
+
+        // 履歴が見つからない場合の処理
+        return redirect()->route('home')->with('error', '保存できませんでした');
     }
 }

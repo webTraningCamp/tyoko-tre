@@ -65,20 +65,19 @@
     <title>home</title>
 </head>
 <body class="text-[12px]">
-    <div id="dialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div id="dialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-[100]">
         <form action="{{ route('history.update') }}">
         @csrf
         @method('PUT')
             <div class="relative">
-                <button type="submit" class="absolute top-[10px] right-[10px]"><img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)"></button>
+                <button type="button" class="absolute top-[10px] right-[10px]"><img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)"></button>
                 <div class="bg-white rounded-[20px] px-[65px] w-[360px] h-[150px] flex flex-col items-center justify-center">
                     <h2 class="text-[16px] font-semibold text-[#ED6E1B]">おもいで</h2>
-                    {{ session('created_at') }}
-                    <input type="hidden" name="created_at" value="{{ session('created_at') }}">
                     <input type="text" name="text" class="py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full">
-                    <button class="mt-[10px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] 
-                    text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]" 
-                    style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                    <input type="hidden" name="date" id="dialogDate">
+                    <button type="submit" class="mt-[10px] flex items-center justify-center bg-[#4EBDE5] border border-white px-[20px] py-[10px] 
+                        text-white rounded-[10px] shadow-[0px 4px 4px rgba(0, 0, 0, 0.25)]"
+                        style="box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
                         おもいでを保管する
                     </button>
                 </div>
@@ -90,7 +89,7 @@
         <div class="p-[20px] pb-[40px] bg-[#BDEEFF] rounded-[20px] mt-[20px]">
             <div class="relative h-[200px]">
                 <div class="flex justify-between">
-                    <p class="text-[48px] font-bold text-[#2AB9ED]">3<span class="text-[38px]">月</span></p>
+                    <p class="text-[48px] font-bold text-[#2AB9ED]">4<span class="text-[38px]">月</span></p>
                     <img src="{{ asset('img/calender_namake.svg') }}" class="absolute right-0 top-0 w-[283px] h-[200px]" alt="カレンダーナマケモノ">
                 </div>  
             </div>
@@ -218,7 +217,7 @@
                     ">{{$day}}</p>
                     @foreach($rotate_data as $data)
                         @if($day == $data['date'])
-                            <img src="{{ asset('img/yokudekimasita.svg') }}" alt="ナマケモノ" class="absolute top-0 left-0 rotate-[{{ $data['rotate'] }}deg]">
+                            <img src="{{ asset('img/yokudekimasita.svg') }}" alt="ナマケモノ"  class="absolute top-0 left-0 rotate-[{{ $data['rotate'] }}deg] cursor-pointer" onclick="openDialog({{$day}})">
                         @endif
                     @endforeach
                 </div>
@@ -279,24 +278,30 @@
             }
         @endif
 
-        function toggleCheckbox(selected) {
-            document.querySelectorAll('input[name="mission"]').forEach(checkbox => {
-                if (checkbox !== selected) {
-                    checkbox.checked = false;
-                }
-            });
-        }
-
-        function closeDialog(element) {
-            const dialog = document.getElementById('dialog');
-            dialog.style.display = 'none';
-        }
-
-        function closeDialog2() {
-            const dialog2 = document.getElementById('dialog2');
-            dialog2.style.display = 'none';
-        }
+        
     });
+    function toggleCheckbox(selected) {
+        document.querySelectorAll('input[name="mission"]').forEach(checkbox => {
+            if (checkbox !== selected) {
+                checkbox.checked = false;
+            }
+        });
+    }
+    function closeDialog(element) {
+        const dialog = document.getElementById('dialog');
+        dialog.style.display = 'none';
+    }
+
+    function openDialog(day) {
+        const dialog = document.getElementById('dialog');
+        const dialogDateInput = document.getElementById('dialogDate');
+        
+        // クリックされた日付を隠しinputに設定
+        dialogDateInput.value = day;
+        
+        // ダイアログを表示
+        dialog.style.display = 'flex';
+    }
 </script>
 
 <style>
