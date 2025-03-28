@@ -123,7 +123,7 @@
             <input type="hidden" name="target_day" id="target_day" value="{{ old('target_day', Auth::user()->target_day) }}">
             
             <button type="submit" class="select font-12 flex items-center justify-center border-[2px] border-white shadow-[0,4px,4px,0]">
-                選択した内容ではじめる
+                選択した内容で設定完了
             </button>
         </form>
     </section>

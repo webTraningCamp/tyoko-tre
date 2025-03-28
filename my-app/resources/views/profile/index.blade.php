@@ -7,6 +7,14 @@
 ?>
 
 <x-app-layout>
+    <div id="dialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-[100]">
+        <form action="{{ route('history.update') }}">
+        @csrf
+        @method('PUT')
+        
+        </form>
+    </div>
+
     <header class="bg-[#F39A48] pt-[40px] pb-[20px] flex justify-center items-center flex-col">
         <img src="{{ asset('img/icon.svg') }}" class="rounded-full" alt="ナマケモノアイコン">
         <h1 class="mt-[10px] text-white text-[1.7rem] font-bold font-darumadrop">{{ $user->name }}</h1>

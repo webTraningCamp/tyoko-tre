@@ -193,7 +193,7 @@
         <div class="p-[20px] pb-[40px] bg-[#BDEEFF] rounded-[20px] mt-[20px]">
             <div class="relative h-[200px]">
                 <div class="flex justify-between">
-                    <p class="text-[48px] font-bold text-[#2AB9ED]">3<span class="text-[38px]">月</span></p>
+                    <p class="text-[48px] font-bold text-[#2AB9ED]">4<span class="text-[38px]">月</span></p>
                     <img src="{{ asset('img/calender_namake.svg') }}" class="absolute right-0 top-0 w-[283px] h-[200px]" alt="カレンダーナマケモノ">
                 </div>  
             </div>
