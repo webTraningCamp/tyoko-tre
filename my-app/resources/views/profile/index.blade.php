@@ -8,18 +8,21 @@
 
 <x-app-layout>
     <div id="dialog" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-[100]">
-        <form action="{{ route('user.update.multiple') }}">
+        <form action="{{ route('user.update.multiple') }}" method="POST">
         @csrf
         @method('PUT')
             <div class="relative">
-                <button type="button" class="absolute top-[10px] right-[10px]"><img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)"></button>
+                <button type="button" class="absolute top-[10px] right-[10px]">
+                    <img src="{{ asset('img/dialog_close.svg') }}" alt="ダイアログを閉じるボタン" onclick="closeDialog(this)">
+                </button>
                 <div class="bg-white rounded-[20px] px-[65px] w-[360px] py-[25px] flex flex-col items-center justify-center">
                     <h2 class="text-[16px] font-semibold text-[#ED6E1B] font-darumadrop tracking-widest">すきなアイコンをえらんでね</h2>
                     <div class="flex items-center justify-between mt-[10px] w-full">
-                        <img src="{{ asset('img/icon1.svg') }}" class="w-[58px] h-[58px]" alt="ナマケモノアイコン">
-                        <img src="{{ asset('img/icon2.svg') }}" class="w-[58px] h-[58px]" alt="ナマケモノアイコン2">
-                        <img src="{{ asset('img/icon3.svg') }}" class="w-[58px] h-[58px]" alt="ナマケモノアイコン3">
+                        <img src="{{ asset('img/icon1.svg') }}" class="w-[58px] h-[58px] iconbtn" data-value="icon1.svg" alt="ナマケモノアイコン" onclick="selectIcon(this)">
+                        <img src="{{ asset('img/icon2.svg') }}" class="w-[58px] h-[58px] iconbtn" data-value="icon2.svg" alt="ナマケモノアイコン2" onclick="selectIcon(this)">
+                        <img src="{{ asset('img/icon3.svg') }}" class="w-[58px] h-[58px] iconbtn" data-value="icon3.svg" alt="ナマケモノアイコン3" onclick="selectIcon(this)">
                     </div>
+                    <input type="hidden" name="icon_url" id="icon">
 
                     <h2 class="text-[16px] font-semibold text-[#ED6E1B] font-darumadrop tracking-widest mt-[10px]">あなたのなまえ</h2>
                     <input type="text" name="name" value="{{ $user->name }}" class="py-[3px] text-center mt-[10px] border border-[#d9d9d9] rounded-[5px] w-full font-darumadrop tracking-widest">
@@ -34,7 +37,7 @@
     </div>
 
     <header class="bg-[#F39A48] pt-[40px] pb-[20px] flex justify-center items-center flex-col">
-        <img src="{{ asset('img/icon1.svg') }}" class="rounded-full" alt="ナマケモノアイコン">
+        <img src="{{ asset('img/' . $user->icon_url) }}" class="rounded-full w-[82px] h-[82px]" alt="ナマケモノアイコン">
         <h1 class="mt-[10px] text-white text-[1.7rem] font-bold font-darumadrop relative">{{ $user->name }} <button onclick=openDialog()><img src="{{ asset('img/edit_profile.svg') }}" class="rounded-full absolute right-[-25px] top-[15px]" alt="編集アイコン"></button></h1>
     </header>
     <section class="px-[10px] text-[12px] pb-[20px] ">
@@ -83,4 +86,21 @@
         document.getElementById('dialog').classList.remove('flex');
         document.getElementById('dialog').classList.add('hidden');
     }
+
+    function selectIcon(element) {
+        const icons = document.querySelectorAll('.iconbtn');
+        icons.forEach(icon => icon.classList.remove('selected'));
+
+        element.classList.add('selected');
+
+        const iconValue = element.getAttribute('data-value');
+        document.getElementById('icon').value = iconValue;
+    }
 </script>
+
+<style>
+    .iconbtn.selected {
+        border: 2px solid #ED6E1B; 
+        transform: scale(1.1);
+    }
+</style>

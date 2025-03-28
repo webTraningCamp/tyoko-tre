@@ -8,23 +8,26 @@ class UserController extends Controller
 {
     public function updateMultiple(Request $request)
     {
-    // dd($request->all());
-    $user = Auth::user();
+        $user = Auth::user();
 
-    if($request->mission !== null){ 
-        $user->mission = $request->mission;
-    }else if($request->target_day !== null){
-        $user->target_day = $request->target_day;
-        $user->hobbies1 = $request->hobbies1;
-        $user->hobbies2 = $request->hobbies2;
-    }else{
-        $user->name = $request->name;
-        $user->icon_url = $request->icon_url;
-    }
+        if($request->mission !== null){ 
+            $user->mission = $request->mission;
+            $user->save();
+            return redirect()->route('home');
 
-    $user->save();
-
-    return redirect()->route('home');
+        }else if($request->target_day !== null){
+            $user->target_day = $request->target_day;
+            $user->hobbies1 = $request->hobbies1;
+            $user->hobbies2 = $request->hobbies2;
+            $user->save();
+            return redirect()->route('home');
+        }else{
+            $user->name = $request->name;
+            $user->icon_url = $request->icon_url;
+            $user->save();
+            return redirect()->route('profile.index');
+        }
+        
     }
 
     public function incrementAchievedDay()
